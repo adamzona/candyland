@@ -11,7 +11,7 @@ with open("questions.json", "r") as file:
 # Define card categories
 def get_random_card(category):
     card_data = random.choice(questions_data[category])
-    card_image_path = os.path.join("cards", card_data["card"])  # Ensure image is loaded from 'cards' folder
+    card_image_path = f"https://raw.githubusercontent.com/adamzona/candyland/main/cards/{card_data['card']}"  # Ensure image is loaded from 'cards' folder
     return card_image_path, card_data["question"], card_data["answer"]
 
 # Function to normalize numeric answers, allowing decimals and fractions
@@ -74,4 +74,6 @@ if st.session_state.card:
                 f"❌ Almost! The answer was: {st.session_state.answer}. Keep going! 🚀",
                 f"❌ Whoops! The answer was: {st.session_state.answer}. Don't give up! 💪"
             ])}</p>", unsafe_allow_html=True)
+            
+
             
