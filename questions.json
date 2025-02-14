@@ -1,0 +1,698 @@
+{
+    "easy": [
+        {
+            "question": "What is the slope of the equation y = 3x + 7?",
+            "answer": "3.0",
+            "card": "single_blue.png"
+        },
+        {
+            "question": "What is the slope of the equation y = 3x + 7?",
+            "answer": "3.0",
+            "card": "single_orange.png"
+        },
+        {
+            "question": "What is the slope of the equation y = 5x + -10?",
+            "answer": "5.0",
+            "card": "single_blue.png"
+        },
+        {
+            "question": "What is the slope of the equation y = 5x + 5?",
+            "answer": "5.0",
+            "card": "single_green.png"
+        },
+        {
+            "question": "What is the slope of the equation y = 3x + 10?",
+            "answer": "3.0",
+            "card": "single_orange.png"
+        },
+        {
+            "question": "What is the slope of the equation y = -2x + 2?",
+            "answer": "-2.0",
+            "card": "single_yellow.png"
+        },
+        {
+            "question": "What is the slope of the equation y = 2x + 6?",
+            "answer": "2.0",
+            "card": "single_blue.png"
+        },
+        {
+            "question": "What is the slope of the equation y = 1x + -6?",
+            "answer": "1.0",
+            "card": "single_red.png"
+        },
+        {
+            "question": "What is the slope of the equation y = -3x + 6?",
+            "answer": "-3.0",
+            "card": "single_orange.png"
+        },
+        {
+            "question": "What is the slope of the equation y = -2x + -8?",
+            "answer": "-2.0",
+            "card": "single_red.png"
+        },
+        {
+            "question": "What is the y-intercept of the equation y = 0x + 4?",
+            "answer": "4.0",
+            "card": "single_yellow.png"
+        },
+        {
+            "question": "What is the y-intercept of the equation y = 2x + -10?",
+            "answer": "-10.0",
+            "card": "single_red.png"
+        },
+        {
+            "question": "What is the y-intercept of the equation y = -1x + -2?",
+            "answer": "-2.0",
+            "card": "single_green.png"
+        },
+        {
+            "question": "What is the y-intercept of the equation y = -2x + 8?",
+            "answer": "8.0",
+            "card": "single_green.png"
+        },
+        {
+            "question": "What is the y-intercept of the equation y = 1x + 2?",
+            "answer": "2.0",
+            "card": "single_purple.png"
+        },
+        {
+            "question": "What is the y-intercept of the equation y = 5x + 5?",
+            "answer": "5.0",
+            "card": "single_orange.png"
+        },
+        {
+            "question": "What is the y-intercept of the equation y = -4x + 6?",
+            "answer": "6.0",
+            "card": "single_blue.png"
+        },
+        {
+            "question": "What is the y-intercept of the equation y = 0x + -10?",
+            "answer": "-10.0",
+            "card": "single_purple.png"
+        },
+        {
+            "question": "What is the y-intercept of the equation y = -3x + -2?",
+            "answer": "-2.0",
+            "card": "single_green.png"
+        },
+        {
+            "question": "What is the y-intercept of the equation y = 3x + 10?",
+            "answer": "10.0",
+            "card": "single_orange.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (6, -5) and (8, 0)?",
+            "answer": "2.5",
+            "card": "single_orange.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (-3, -3) and (4, 2)?",
+            "answer": "0.7",
+            "card": "single_orange.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (-1, 8) and (0, -2)?",
+            "answer": "-10.0",
+            "card": "single_yellow.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (-6, 2) and (-8, -5)?",
+            "answer": "3.5",
+            "card": "single_blue.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (-5, -1) and (10, -9)?",
+            "answer": "-0.5",
+            "card": "single_red.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (-1, 5) and (-2, 8)?",
+            "answer": "-3.0",
+            "card": "single_red.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (-2, 9) and (7, 8)?",
+            "answer": "-0.1",
+            "card": "single_purple.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (7, -6) and (-5, 1)?",
+            "answer": "-0.6",
+            "card": "single_yellow.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (-4, -2) and (-10, 6)?",
+            "answer": "-1.3",
+            "card": "single_yellow.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (-5, -3) and (2, -5)?",
+            "answer": "-0.3",
+            "card": "single_purple.png"
+        },
+        {
+            "question": "If y = 3x + 4, what is y when x = 3?",
+            "answer": "13.0",
+            "card": "single_yellow.png"
+        },
+        {
+            "question": "If y = -4x + -4, what is y when x = -1?",
+            "answer": "0.0",
+            "card": "single_orange.png"
+        },
+        {
+            "question": "If y = 5x + 5, what is y when x = 4?",
+            "answer": "25.0",
+            "card": "single_green.png"
+        },
+        {
+            "question": "If y = 3x + -9, what is y when x = -3?",
+            "answer": "-18.0",
+            "card": "single_red.png"
+        },
+        {
+            "question": "If y = 2x + -6, what is y when x = -6?",
+            "answer": "-18.0",
+            "card": "single_green.png"
+        },
+        {
+            "question": "If y = 3x + 4, what is y when x = -5?",
+            "answer": "-11.0",
+            "card": "single_purple.png"
+        },
+        {
+            "question": "If y = -3x + -2, what is y when x = 2?",
+            "answer": "-8.0",
+            "card": "single_yellow.png"
+        },
+        {
+            "question": "If y = -5x + -2, what is y when x = 2?",
+            "answer": "-12.0",
+            "card": "single_purple.png"
+        },
+        {
+            "question": "If y = 5x + 2, what is y when x = -10?",
+            "answer": "-48.0",
+            "card": "single_blue.png"
+        },
+        {
+            "question": "If y = 0x + -9, what is y when x = 6?",
+            "answer": "-9.0",
+            "card": "single_red.png"
+        },
+        {
+            "question": "If y = -1x + 8, what is x when y = -6?",
+            "answer": "14.0",
+            "card": "single_purple.png"
+        },
+        {
+            "question": "If y = 4x + 2, what is x when y = 7?",
+            "answer": "1.2",
+            "card": "single_red.png"
+        },
+        {
+            "question": "If y = 5x + -7, what is x when y = -6?",
+            "answer": "0.2",
+            "card": "single_orange.png"
+        },
+        {
+            "question": "If y = 3x + -8, what is x when y = 1?",
+            "answer": "3.0",
+            "card": "single_orange.png"
+        },
+        {
+            "question": "If y = 4x + 5, what is x when y = 0?",
+            "answer": "-1.2",
+            "card": "single_purple.png"
+        },
+        {
+            "question": "If y = 2x + -3, what is x when y = 9?",
+            "answer": "6.0",
+            "card": "single_orange.png"
+        },
+        {
+            "question": "If y = -4x + 10, what is x when y = 2?",
+            "answer": "2.0",
+            "card": "single_green.png"
+        },
+        {
+            "question": "If y = 4x + 10, what is x when y = 6?",
+            "answer": "-1.0",
+            "card": "single_blue.png"
+        }
+    ],
+    "medium": [
+        {
+            "question": "What is the slope of the line passing through (4, 9) and (9, 10)?",
+            "answer": "0.2",
+            "card": "double_red.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (-10, -6) and (-4, 7)?",
+            "answer": "2.2",
+            "card": "double_green.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (-10, -1) and (-9, 10)?",
+            "answer": "11.0",
+            "card": "double_green.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (0, -1) and (-2, -5)?",
+            "answer": "2.0",
+            "card": "double_green.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (-8, -4) and (9, -10)?",
+            "answer": "-0.3",
+            "card": "double_yellow.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (-1, 9) and (4, -7)?",
+            "answer": "-3.2",
+            "card": "double_orange.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (1, -10) and (-10, -10)?",
+            "answer": "0.0",
+            "card": "double_blue.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (-5, 8) and (7, 8)?",
+            "answer": "0.0",
+            "card": "double_yellow.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (-2, -7) and (1, -8)?",
+            "answer": "-0.3",
+            "card": "double_blue.png"
+        },
+        {
+            "question": "What is the slope of the line passing through (0, -9) and (9, 10)?",
+            "answer": "2.1",
+            "card": "double_red.png"
+        },
+        {
+            "question": "What is the y-intercept of the line given by the equation y + 8 = -3(x + 6)?",
+            "answer": "-26.0",
+            "card": "double_yellow.png"
+        },
+        {
+            "question": "What is the y-intercept of the line given by the equation y - 6 = 1(x + 4)?",
+            "answer": "10.0",
+            "card": "double_red.png"
+        },
+        {
+            "question": "What is the y-intercept of the line given by the equation y + 7 = 0(x - 9)?",
+            "answer": "-7.0",
+            "card": "double_orange.png"
+        },
+        {
+            "question": "What is the y-intercept of the line given by the equation y - 4 = -2(x + 3)?",
+            "answer": "-2.0",
+            "card": "double_red.png"
+        },
+        {
+            "question": "What is the y-intercept of the line given by the equation y + 1 = 4(x - 2)?",
+            "answer": "-9.0",
+            "card": "double_blue.png"
+        },
+        {
+            "question": "What is the y-intercept of the line given by the equation y + 6 = 5(x + 7)?",
+            "answer": "29.0",
+            "card": "double_blue.png"
+        },
+        {
+            "question": "What is the y-intercept of the line given by the equation y + 4 = 2(x + 1)?",
+            "answer": "-2.0",
+            "card": "double_red.png"
+        },
+        {
+            "question": "What is the y-intercept of the line given by the equation y - 5 = 3(x - 0)?",
+            "answer": "5.0",
+            "card": "double_green.png"
+        },
+        {
+            "question": "What is the y-intercept of the line given by the equation y - 8 = -5(x + 5)?",
+            "answer": "-17.0",
+            "card": "double_purple.png"
+        },
+        {
+            "question": "What is the y-intercept of the line given by the equation y - 8 = -2(x + 2)?",
+            "answer": "4.0",
+            "card": "double_orange.png"
+        },
+        {
+            "question": "What is the slope of the equation of the line that passes through (-7, -1) with a slope of 5?",
+            "answer": "5.0",
+            "card": "double_red.png"
+        },
+        {
+            "question": "What is the slope of the equation of the line that passes through (-6, 7) with a slope of 2?",
+            "answer": "2.0",
+            "card": "double_yellow.png"
+        },
+        {
+            "question": "What is the slope of the equation of the line that passes through (-6, 7) with a slope of 2?",
+            "answer": "2.0",
+            "card": "double_red.png"
+        },
+        {
+            "question": "What is the slope of the equation of the line that passes through (-7, -7) with a slope of -2?",
+            "answer": "-2.0",
+            "card": "double_orange.png"
+        },
+        {
+            "question": "What is the slope of the equation of the line that passes through (-5, 0) with a slope of 2?",
+            "answer": "2.0",
+            "card": "double_blue.png"
+        },
+        {
+            "question": "What is the slope of the equation of the line that passes through (4, -6) with a slope of 4?",
+            "answer": "4.0",
+            "card": "double_yellow.png"
+        },
+        {
+            "question": "What is the slope of the equation of the line that passes through (8, 2) with a slope of 5?",
+            "answer": "5.0",
+            "card": "double_yellow.png"
+        },
+        {
+            "question": "What is the slope of the equation of the line that passes through (9, 6) with a slope of 5?",
+            "answer": "5.0",
+            "card": "double_orange.png"
+        },
+        {
+            "question": "What is the slope of the equation of the line that passes through (-4, 2) with a slope of 4?",
+            "answer": "4.0",
+            "card": "double_yellow.png"
+        },
+        {
+            "question": "What is the slope of the equation of the line that passes through (1, 4) with a slope of 2?",
+            "answer": "2.0",
+            "card": "double_blue.png"
+        },
+        {
+            "question": "If the equation of a line is given by y + 3 = 4(x + 10), what is y when x = -10?",
+            "answer": "-3.0",
+            "card": "double_purple.png"
+        },
+        {
+            "question": "If the equation of a line is given by y + 8 = -4(x - 5), what is y when x = 4?",
+            "answer": "-4.0",
+            "card": "double_yellow.png"
+        },
+        {
+            "question": "If the equation of a line is given by y - 4 = 2(x + 1), what is y when x = 8?",
+            "answer": "22.0",
+            "card": "double_green.png"
+        },
+        {
+            "question": "If the equation of a line is given by y - 3 = 0(x + 7), what is y when x = -7?",
+            "answer": "3.0",
+            "card": "double_yellow.png"
+        },
+        {
+            "question": "If the equation of a line is given by y - 3 = 3(x - 6), what is y when x = -9?",
+            "answer": "-42.0",
+            "card": "double_red.png"
+        },
+        {
+            "question": "If the equation of a line is given by y + 8 = 0(x - 4), what is y when x = -7?",
+            "answer": "-8.0",
+            "card": "double_orange.png"
+        },
+        {
+            "question": "If the equation of a line is given by y - 6 = -5(x + 2), what is y when x = -2?",
+            "answer": "6.0",
+            "card": "double_purple.png"
+        },
+        {
+            "question": "If the equation of a line is given by y - 9 = 3(x - 5), what is y when x = -3?",
+            "answer": "-15.0",
+            "card": "double_red.png"
+        },
+        {
+            "question": "If the equation of a line is given by y - 0 = 3(x - -10), what is y when x = 2?",
+            "answer": "36.0",
+            "card": "double_yellow.png"
+        },
+        {
+            "question": "If the equation of a line is given by y + 6 = -5(x - 0), what is y when x = -4?",
+            "answer": "14.0",
+            "card": "double_green.png"
+        },
+        {
+            "question": "If the equation of a line is given by y + 7 = -1(x - 3), what is x when y = -8?",
+            "answer": "4.0",
+            "card": "double_green.png"
+        },
+        {
+            "question": "If the equation of a line is given by y + 8 = 3(x - 8), what is x when y = -4?",
+            "answer": "9.3",
+            "card": "double_yellow.png"
+        },
+        {
+            "question": "If the equation of a line is given by y + 5 = -3(x + 2), what is x when y = -6?",
+            "answer": "-1.7",
+            "card": "double_blue.png"
+        },
+        {
+            "question": "If the equation of a line is given by y + 7 = -5(x + 7), what is x when y = -1?",
+            "answer": "-8.2",
+            "card": "double_yellow.png"
+        },
+        {
+            "question": "If the equation of a line is given by y - 9 = -5(x + 7), what is x when y = 9?",
+            "answer": "-7.0",
+            "card": "double_yellow.png"
+        },
+        {
+            "question": "If the equation of a line is given by y + 1 = -3(x - 6), what is x when y = 8?",
+            "answer": "3.0",
+            "card": "double_green.png"
+        },
+        {
+            "question": "If the equation of a line is given by y + 9 = -1(x - 0), what is x when y = 9?",
+            "answer": "-18.0",
+            "card": "double_blue.png"
+        },
+        {
+            "question": "If the equation of a line is given by y + 8 = 1(x + 7), what is x when y = 1?",
+            "answer": "2.0",
+            "card": "double_green.png"
+        },
+        {
+            "question": "If the equation of a line is given by y + 1 = 4(x + 8), what is x when y = 0?",
+            "answer": "-7.8",
+            "card": "double_blue.png"
+        },
+        {
+            "question": "If the equation of a line is given by y - 8 = 3(x - 10), what is x when y = 9?",
+            "answer": "10.3",
+            "card": "double_blue.png"
+        }
+    ],
+    "hard": [
+        {
+            "question": "A line passes through (6, -17) with a slope of 0. What is the y-intercept of this line?",
+            "answer": "-17.0",
+            "card": "lollipop.png"
+        },
+        {
+            "question": "A line passes through (-10, 3) with a slope of 10. What is the y-intercept of this line?",
+            "answer": "103.0",
+            "card": "candycane.png"
+        },
+        {
+            "question": "A line passes through (-2, 10) with a slope of -10. What is the y-intercept of this line?",
+            "answer": "-10.0",
+            "card": "cone.png"
+        },
+        {
+            "question": "A line passes through (-2, -17) with a slope of 0. What is the y-intercept of this line?",
+            "answer": "-17.0",
+            "card": "gingerbread.png"
+        },
+        {
+            "question": "A line passes through (-7, 17) with a slope of -8. What is the y-intercept of this line?",
+            "answer": "-39.0",
+            "card": "cone.png"
+        },
+        {
+            "question": "A line passes through (1, -5) with a slope of 9. What is the y-intercept of this line?",
+            "answer": "-14.0",
+            "card": "peanut.png"
+        },
+        {
+            "question": "A line passes through (19, 10) with a slope of -5. What is the y-intercept of this line?",
+            "answer": "105.0",
+            "card": "lollipop.png"
+        },
+        {
+            "question": "A line passes through (2, -19) with a slope of 1. What is the y-intercept of this line?",
+            "answer": "-21.0",
+            "card": "tree.png"
+        },
+        {
+            "question": "A line passes through (-12, -15) with a slope of -5. What is the y-intercept of this line?",
+            "answer": "-75.0",
+            "card": "tree.png"
+        },
+        {
+            "question": "A line passes through (-1, 4) with a slope of 7. What is the y-intercept of this line?",
+            "answer": "11.0",
+            "card": "cone.png"
+        },
+        {
+            "question": "What is the x-intercept of the line y = 3x + -7?",
+            "answer": "2.3",
+            "card": "peanut.png"
+        },
+        {
+            "question": "What is the x-intercept of the line y = -2x + -13?",
+            "answer": "-6.5",
+            "card": "gingerbread.png"
+        },
+        {
+            "question": "What is the x-intercept of the line y = 9x + -5?",
+            "answer": "0.6",
+            "card": "lollipop.png"
+        },
+        {
+            "question": "What is the x-intercept of the line y = -5x + -13?",
+            "answer": "-2.6",
+            "card": "peanut.png"
+        },
+        {
+            "question": "What is the x-intercept of the line y = 3x + 7?",
+            "answer": "-2.3",
+            "card": "candycane.png"
+        },
+        {
+            "question": "What is the x-intercept of the line y = -3x + -1?",
+            "answer": "-0.3",
+            "card": "tree.png"
+        },
+        {
+            "question": "What is the x-intercept of the line y = -8x + -6?",
+            "answer": "-0.8",
+            "card": "candycane.png"
+        },
+        {
+            "question": "What is the x-intercept of the line y = -5x + 15?",
+            "answer": "3.0",
+            "card": "tree.png"
+        },
+        {
+            "question": "What is the x-intercept of the line y = -3x + 4?",
+            "answer": "1.3",
+            "card": "tree.png"
+        },
+        {
+            "question": "What is the x-intercept of the line y = 8x + 7?",
+            "answer": "-0.9",
+            "card": "candycane.png"
+        },
+        {
+            "question": "A line passes through (-17, -11) and has a slope of -9. What is the y-coordinate when x = 10?",
+            "answer": "-254.0",
+            "card": "lollipop.png"
+        },
+        {
+            "question": "A line passes through (12, -19) and has a slope of 9. What is the y-coordinate when x = 16?",
+            "answer": "17.0",
+            "card": "tree.png"
+        },
+        {
+            "question": "A line passes through (19, 16) and has a slope of 0. What is the y-coordinate when x = 2?",
+            "answer": "16.0",
+            "card": "cone.png"
+        },
+        {
+            "question": "A line passes through (20, 12) and has a slope of -3. What is the y-coordinate when x = -4?",
+            "answer": "84.0",
+            "card": "tree.png"
+        },
+        {
+            "question": "A line passes through (-7, -6) and has a slope of 1. What is the y-coordinate when x = -10?",
+            "answer": "-9.0",
+            "card": "tree.png"
+        },
+        {
+            "question": "A line passes through (16, 8) and has a slope of -10. What is the y-coordinate when x = 4?",
+            "answer": "128.0",
+            "card": "cone.png"
+        },
+        {
+            "question": "A line passes through (0, 7) and has a slope of -1. What is the y-coordinate when x = 19?",
+            "answer": "-12.0",
+            "card": "candycane.png"
+        },
+        {
+            "question": "A line passes through (9, -16) and has a slope of 1. What is the y-coordinate when x = 8?",
+            "answer": "-17.0",
+            "card": "lollipop.png"
+        },
+        {
+            "question": "A line passes through (7, 18) and has a slope of -3. What is the y-coordinate when x = 4?",
+            "answer": "27.0",
+            "card": "peanut.png"
+        },
+        {
+            "question": "A line passes through (-13, -18) and has a slope of -7. What is the y-coordinate when x = 7?",
+            "answer": "-158.0",
+            "card": "peanut.png"
+        },
+        {
+            "question": "What is the y-intercept of the line that passes through (18, -9) and (-15, 19)?",
+            "answer": "6.3",
+            "card": "gingerbread.png"
+        },
+        {
+            "question": "What is the y-intercept of the line that passes through (-18, -16) and (-14, -8)?",
+            "answer": "20.0",
+            "card": "tree.png"
+        },
+        {
+            "question": "What is the y-intercept of the line that passes through (11, 7) and (-5, 17)?",
+            "answer": "13.9",
+            "card": "lollipop.png"
+        },
+        {
+            "question": "What is the y-intercept of the line that passes through (-3, 7) and (8, -7)?",
+            "answer": "3.2",
+            "card": "lollipop.png"
+        },
+        {
+            "question": "What is the y-intercept of the line that passes through (-17, 11) and (-13, -16)?",
+            "answer": "-103.8",
+            "card": "lollipop.png"
+        },
+        {
+            "question": "What is the y-intercept of the line that passes through (-3, 14) and (-19, 4)?",
+            "answer": "15.9",
+            "card": "peanut.png"
+        },
+        {
+            "question": "What is the y-intercept of the line that passes through (2, 5) and (-18, 0)?",
+            "answer": "4.5",
+            "card": "gingerbread.png"
+        },
+        {
+            "question": "What is the y-intercept of the line that passes through (7, -15) and (3, -18)?",
+            "answer": "-20.2",
+            "card": "cone.png"
+        },
+        {
+            "question": "What is the y-intercept of the line that passes through (7, -13) and (-8, 17)?",
+            "answer": "1.0",
+            "card": "cone.png"
+        },
+        {
+            "question": "What is the y-intercept of the line that passes through (1, 1) and (16, 15)?",
+            "answer": "0.1",
+            "card": "tree.png"
+        }
+    ]
+}
