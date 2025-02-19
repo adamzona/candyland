@@ -59,7 +59,7 @@ st.markdown("""
         padding: 10px;
         border-radius: 10px;
         text-align: center;
-        width: 100px;
+        width: 140px;
         height: 50px;
         box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
         display: flex;
@@ -136,7 +136,7 @@ if st.button("🎲 Draw a Card"):
     card_type = random.choices(['easy', 'medium', 'hard'], weights=[50, 40, 10])[0]
     st.session_state.card, st.session_state.question, st.session_state.answer, st.session_state.card_type = get_random_card(card_type)
 
-# **Display the Timer & Sweet Score in the Top Right**
+# **Make sure the timer updates while the game is active**
 if st.session_state.timer_running and not st.session_state.answered:
     elapsed_time = time.time() - st.session_state.start_time
     st.session_state.timer = max(0, 45 - int(elapsed_time))
@@ -149,8 +149,8 @@ if st.session_state.timer_running and not st.session_state.answered:
         st.error(f"⏳ Time's up! The correct answer was: {st.session_state.answer} ❌")
 
 # **Update Timer & Sweet Score Display**
-timer_placeholder.markdown(f"<div class='timer-box'>{st.session_state.timer}s</div>", unsafe_allow_html=True)
-sweet_score_placeholder.markdown(f"<div class='score-box'>🍭 {st.session_state.sweet_score}</div>", unsafe_allow_html=True)
+timer_placeholder.markdown(f"<div class='timer-box'>⏳ {st.session_state.timer}s</div>", unsafe_allow_html=True)
+sweet_score_placeholder.markdown(f"<div class='score-box'>🍭 Sweet Score: {st.session_state.sweet_score}</div>", unsafe_allow_html=True)
 
 if st.session_state.card:
     # Apply fade-in effect to the drawn card
@@ -165,23 +165,4 @@ if st.session_state.card:
             incorrect_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/buzzer.mp3"
 
             if normalize_answer(user_answer) == normalize_answer(st.session_state.answer):
-                points = {"easy": 10, "medium": 15, "hard": 20}
-                score_earned = points[st.session_state.card_type]
-                st.session_state.sweet_score += score_earned
-
-                correct_feedback = random.choice([
-                    f"✅ Correct! You earned {score_earned} points! 🍭",
-                    f"✅ Sweet success! {score_earned} points added! 🍬",
-                    f"✅ Boom! +{score_earned} points! 🚀"
-                ])
-                st.markdown(f"<p class='animated-text'>{correct_feedback}</p>", unsafe_allow_html=True)
-
-                # Play correct answer sound
-                st.markdown(play_sound(correct_sound), unsafe_allow_html=True)
-            else:
-                st.error(f"❌ Nope! The correct answer was: {st.session_state.answer}.")
-
-                # Play incorrect answer sound
-                st.markdown(play_sound(incorrect_sound), unsafe_allow_html=True)
-
-            st.session_state.answered = True
+                points = {"easy": 10, "medium": 15, "har
