@@ -25,9 +25,9 @@ def normalize_answer(answer):
             return answer.strip().lower()
 
 # Streamlit UI Customization
-st.set_page_config(page_title="Candy Land Game", page_icon="🍭", layout="centered")
+st.set_page_config(page_title="Candy Land Game", page_icon="🍬", layout="centered")
 
-st.title("🍬 Candy Land Digital Card Generator 🍽")
+st.title("🍬 Candy Land Digital Card Generator 🍭")
 st.markdown("<h2 class='big-font'>Draw a Card & Answer the Question!</h2>", unsafe_allow_html=True)
 
 # Ensure session state exists
@@ -72,7 +72,7 @@ if st.button("🎲 Draw a Card"):
 
 # Display the drawn card
 if st.session_state.card:
-    st.image(st.session_state.card, caption=f"{st.session_state.card_type.capitalize()} Card", use_container_width=True)
+    st.image(st.session_state.card, caption=f"{st.session_state.card_type.capitalize()} Card", width=300)
     st.markdown(f"<div class='question-box'>{st.session_state.question}</div>", unsafe_allow_html=True)
     
     # Answer input
@@ -93,6 +93,8 @@ if st.session_state.card:
 
 # Display timer and score
 if st.session_state.timer_running:
+    st.session_state.timer -= 1
+    time.sleep(1)
     time_elapsed = time.time() - st.session_state.start_time
     remaining_time = max(0, st.session_state.timer - int(time_elapsed))
     
@@ -103,3 +105,4 @@ if st.session_state.timer_running:
     st.write(f"⏳ Time Left: {remaining_time} seconds")
 
 st.write(f"🍭 Sweet Score: {st.session_state.sweet_score}")
+
