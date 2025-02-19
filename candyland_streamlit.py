@@ -63,9 +63,9 @@ if st.button("🎲 Draw a Card"):
     st.session_state.answered = False  # Reset answered status
     
     st.session_state.answered = False
-    st.session_state.timer = 45  # Reset the timer
-    st.session_state.timer_running = True  # Start timer
-    st.session_state.start_time = time.time()  # Set start time
+    
+    
+    
 
     # Play Draw Card Sound
     st.markdown(play_sound(draw_sound), unsafe_allow_html=True)
@@ -94,14 +94,16 @@ if st.session_state.card:
         normalized_user_answer = normalize_answer(user_answer)
         normalized_correct_answer = normalize_answer(st.session_state.answer)
         
-        if normalized_user_answer.strip() == normalized_correct_answer.strip():
+        if normalized_user_answer == normalized_correct_answer:
             st.session_state.answer_feedback = "🎊 Sweet Victory! You got it right! 🍭 Keep going! 🎉"
-        st.markdown(play_sound("https://raw.githubusercontent.com/adamzona/candyland/main/sounds/correct.mp3"), unsafe_allow_html=True)
-        st.session_state.sweet_score += 10  # Increase score
+            st.markdown(play_sound("https://raw.githubusercontent.com/adamzona/candyland/main/sounds/correct.mp3"), unsafe_allow_html=True)
+            st.session_state.sweet_score += 10  # Increase score
     
         
         
-        st.session_state.answered = True  # Prevent multiple submissions
+                        else:
+                    st.session_state.answered = True  # Prevent multiple submissions
+            st.session_state.answer_feedback = None  # Ensure no message is shown for incorrect answers
         
 
 # Display timer and score
