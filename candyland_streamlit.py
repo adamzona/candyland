@@ -43,31 +43,30 @@ st.markdown("""
         text-align: center;
     }
     .score-box {
-        font-size: 36px;
+        font-size: 30px;
         font-weight: bold;
         color: white;
         background-color: #ff66b2;
-        padding: 15px;
+        padding: 10px;
         border-radius: 15px;
         text-align: center;
+        width: 200px;
+        margin: auto;
         box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
     }
     .timer-box {
-        font-size: 40px;
+        font-size: 24px;
         font-weight: bold;
         color: white;
         background: linear-gradient(to right, #FF69B4, #FF1493, #FFD700);
-        padding: 15px;
-        border-radius: 20px;
+        padding: 10px;
+        border-radius: 10px;
         text-align: center;
-        margin-top: 10px;
+        width: 80px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
         box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-        animation: pulse 1s infinite;
-    }
-    @keyframes pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.05); }
-        100% { transform: scale(1); }
     }
     .animated-text {font-size:22px; text-align:center; animation: fadeIn 2s;}
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -79,6 +78,9 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# Timer Display (Small, Square, Top Corner)
+timer_placeholder = st.empty()
+
 st.title("🍬 Candy Land Digital Card Generator 🍭")
 st.markdown("<h2 class='big-font'>Draw a Card & Answer the Question!</h2>", unsafe_allow_html=True)
 
@@ -89,13 +91,10 @@ if "card" not in st.session_state:
     st.session_state.answer = None
     st.session_state.card_type = None
     st.session_state.answered = False
-    st.session_state.sweetness_score = 0
+    st.session_state.sweet_score = 0  # Renamed from Sweetness Score
     st.session_state.timer = 45  # Start with 45 seconds
     st.session_state.timer_running = False  # Control for stopping timer
     st.session_state.start_time = None  # Timer start time
-
-# Display Sweetness Score
-st.markdown(f"<div class='score-box'>🍭 Sweetness Score: {st.session_state.sweetness_score} 🍭</div>", unsafe_allow_html=True)
 
 # Play a draw card sound
 draw_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/chime.mp3"
@@ -124,28 +123,28 @@ if st.button("🎲 Draw a Card"):
     card_type = random.choices(['easy', 'medium', 'hard'], weights=[50, 40, 10])[0]
     st.session_state.card, st.session_state.question, st.session_state.answer, st.session_state.card_type = get_random_card(card_type)
 
+# **Display the Timer in the Top Corner**
+if st.session_state.timer_running and not st.session_state.answered:
+    elapsed_time = time.time() - st.session_state.start_time
+    st.session_state.timer = max(0, 45 - int(elapsed_time))
+
+    if st.session_state.timer == 0:
+        st.session_state.timer_running = False
+        st.session_state.answered = True
+        incorrect_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/buzzer.mp3"
+        st.markdown(play_sound(incorrect_sound), unsafe_allow_html=True)
+        st.error(f"⏳ Time's up! The correct answer was: {st.session_state.answer} ❌")
+
+# **Update Timer Display**
+timer_placeholder.markdown(f"<div class='timer-box'>{st.session_state.timer}s</div>", unsafe_allow_html=True)
+
+# **Display Sweet Score (Only One)**
+st.markdown(f"<div class='score-box'>🍭 Sweet Score: {st.session_state.sweet_score} 🍭</div>", unsafe_allow_html=True)
+
 if st.session_state.card:
     # Apply fade-in effect to the drawn card
     st.image(st.session_state.card, caption="Card Drawn", width=300)  # Fixed image size
     st.markdown(f"<div class='question-box'><b>Question:</b> {st.session_state.question}</div>", unsafe_allow_html=True)
-
-    # **Fix Timer UI Issue** (Use `st.empty()` for smooth updates)
-    timer_placeholder = st.empty()
-
-    # **Update the timer if running**
-    if st.session_state.timer_running and not st.session_state.answered:
-        elapsed_time = time.time() - st.session_state.start_time
-        st.session_state.timer = max(0, 45 - int(elapsed_time))
-
-        if st.session_state.timer == 0:
-            st.session_state.timer_running = False
-            st.session_state.answered = True
-            incorrect_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/buzzer.mp3"
-            st.markdown(play_sound(incorrect_sound), unsafe_allow_html=True)
-            st.error(f"⏳ Time's up! The correct answer was: {st.session_state.answer} ❌")
-
-    # **Display Timer**
-    timer_placeholder.markdown(f"<div class='timer-box'>⏳ {st.session_state.timer} sec</div>", unsafe_allow_html=True)
 
     # **Ensure Answer Input & Submit Button Always Show**
     if not st.session_state.answered:
@@ -157,7 +156,7 @@ if st.session_state.card:
             if normalize_answer(user_answer) == normalize_answer(st.session_state.answer):
                 points = {"easy": 10, "medium": 15, "hard": 20}
                 score_earned = points[st.session_state.card_type]
-                st.session_state.sweetness_score += score_earned
+                st.session_state.sweet_score += score_earned
 
                 correct_feedback = random.choice([
                     f"✅ Correct! You earned {score_earned} points! 🍭",
@@ -176,4 +175,5 @@ if st.session_state.card:
 
             st.session_state.answered = True
 
-    st.markdown(f"<div class='score-box'>🍭 Sweetness Score: {st.session_state.sweetness_score} 🍭</div>", unsafe_allow_html=True)
+    # **Only One Sweet Score Display**
+    st.markdown(f"<div class='score-box'>🍭 Sweet Score: {st.session_state.sweet_score} 🍭</div>", unsafe_allow_html=True)
