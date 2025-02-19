@@ -53,13 +53,13 @@ st.markdown("""
     }
 
     .timer-box, .score-box {
-        font-size: 24px;
+        font-size: 20px;
         font-weight: bold;
         color: white;
         padding: 10px;
         border-radius: 10px;
         text-align: center;
-        width: 140px;
+        width: 150px;
         height: 50px;
         box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
         display: flex;
@@ -164,5 +164,25 @@ if st.session_state.card:
             correct_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/correct.mp3"
             incorrect_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/buzzer.mp3"
 
+            points = {"easy": 10, "medium": 15, "hard": 20}  # ✅ Fixed dictionary
+
             if normalize_answer(user_answer) == normalize_answer(st.session_state.answer):
-                points = {"easy": 10, "medium": 15, "har
+                score_earned = points[st.session_state.card_type]
+                st.session_state.sweet_score += score_earned
+
+                correct_feedback = random.choice([
+                    f"✅ Correct! You earned {score_earned} points! 🍭",
+                    f"✅ Sweet success! {score_earned} points added! 🍬",
+                    f"✅ Boom! +{score_earned} points! 🚀"
+                ])
+                st.markdown(f"<p class='animated-text'>{correct_feedback}</p>", unsafe_allow_html=True)
+
+                # Play correct answer sound
+                st.markdown(play_sound(correct_sound), unsafe_allow_html=True)
+            else:
+                st.error(f"❌ Nope! The correct answer was: {st.session_state.answer}.")
+
+                # Play incorrect answer sound
+                st.markdown(play_sound(incorrect_sound), unsafe_allow_html=True)
+
+            st.session_state.answered = True
