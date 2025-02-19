@@ -39,6 +39,7 @@ if "card" not in st.session_state:
     st.session_state.answer = None
     st.session_state.card_type = None
     st.session_state.answered = False
+    st.session_state.answer_feedback = None
     st.session_state.sweet_score = 0  # Renamed from Sweetness Score
     
     
@@ -58,7 +59,7 @@ def play_sound(sound_url):
 # Draw a card button
 if st.button("🎲 Draw a Card"):
     
-    st.session_state.answer_feedback = None  # Reset feedback message
+    st.session_state.pop('answer_feedback', None)
     st.session_state.answered = False  # Reset answered status
     
     st.session_state.answered = False
@@ -93,7 +94,7 @@ if st.session_state.card:
         normalized_user_answer = normalize_answer(user_answer)
         normalized_correct_answer = normalize_answer(st.session_state.answer)
         
-        if normalized_user_answer == normalized_correct_answer:
+        if normalized_user_answer.strip() == normalized_correct_answer.strip():
             st.session_state.answer_feedback = "🎊 Sweet Victory! You got it right! 🍭 Keep going! 🎉"
         st.markdown(play_sound("https://raw.githubusercontent.com/adamzona/candyland/main/sounds/correct.mp3"), unsafe_allow_html=True)
         st.session_state.sweet_score += 10  # Increase score
@@ -102,6 +103,7 @@ if st.session_state.card:
         
         
         st.session_state.answered = True  # Prevent multiple submissions
+        st.session_state.answer_feedback = st.session_state.answer_feedback
 
 # Display timer and score
 
