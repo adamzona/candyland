@@ -101,8 +101,8 @@ if st.session_state.card:
     
         
         
-                        else:
-                    st.session_state.answered = True  # Prevent multiple submissions
+                                else:
+                                st.session_state.answered = True  # Prevent multiple submissions
             st.session_state.answer_feedback = None  # Ensure no message is shown for incorrect answers
         
 
