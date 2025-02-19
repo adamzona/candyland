@@ -115,7 +115,7 @@ if st.button("🎲 Draw a Card"):
 
 if st.session_state.card:
     # Apply fade-in effect to the drawn card
-    st.image(st.session_state.card, caption="Card Drawn", width=300, use_column_width=True)
+    st.image(st.session_state.card, caption="Card Drawn", width=300, use_container_width=True)
     st.markdown(f"<div class='question-box'><b>Question:</b> {st.session_state.question}</div>", unsafe_allow_html=True)
 
     # Countdown Timer Logic
@@ -125,7 +125,10 @@ if st.session_state.card:
             elapsed_time = time.time() - start_time
             st.session_state.timer = max(0, 45 - int(elapsed_time))
             time.sleep(1)
-            st.experimental_rerun()  # Refresh page to update timer
+
+            # **Fix: Use session state instead of experimental_rerun()**
+            st.session_state.rerun = True
+            st.stop()
 
         # If timer runs out, auto-submit as incorrect
         if st.session_state.timer == 0 and not st.session_state.answered:
