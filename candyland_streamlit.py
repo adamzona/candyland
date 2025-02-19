@@ -102,7 +102,7 @@ if st.session_state.card:
         
         
         st.session_state.answered = True  # Prevent multiple submissions
-        st.session_state.answer_feedback = st.session_state.answer_feedback
+        
 
 # Display timer and score
 
