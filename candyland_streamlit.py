@@ -50,6 +50,7 @@ if "card" not in st.session_state:
     st.session_state.card = None
     st.session_state.question = None
     st.session_state.answer = None
+    st.session_state.answered = False  # Tracks if the question was answered
 
 if st.button("🎲 Draw a Card"):  
     card_type = random.choices(
@@ -57,13 +58,16 @@ if st.button("🎲 Draw a Card"):
     )[0]  # Probabilities for each type
     
     st.session_state.card, st.session_state.question, st.session_state.answer = get_random_card(card_type)
+    st.session_state.answered = False  # Reset answer state when drawing a new card
 
 if st.session_state.card:
     st.image(st.session_state.card, caption="Card Drawn", width=300)
     st.markdown(f"<div class='question-box'><b>Question:</b> {st.session_state.question}</div>", unsafe_allow_html=True)
     
-    user_answer = st.text_input("Your Answer:", key="answer_input")
-    if st.button("Submit Answer"):
+    # Disable input & submit button if question was already answered
+    user_answer = st.text_input("Your Answer:", key="answer_input", disabled=st.session_state.answered)
+    
+    if st.button("Submit Answer", disabled=st.session_state.answered):
         if normalize_answer(user_answer) == normalize_answer(st.session_state.answer):
             correct_feedback = random.choice([
                 "✅ Correct! You're on fire! 🔥",
@@ -73,7 +77,6 @@ if st.session_state.card:
                 "✅ That was smoother than chocolate! 🍫"
             ])
             st.markdown(f"<p class='animated-text'>{correct_feedback}</p>", unsafe_allow_html=True)
-            
         else:
             incorrect_feedback = random.choice([
                 f"❌ Nope! The correct answer was: {st.session_state.answer}. Try again! 🤔",
@@ -83,4 +86,8 @@ if st.session_state.card:
                 f"❌ Whoops! The answer was: {st.session_state.answer}. Don't give up! 💪"
             ])
             st.markdown(f"<p class='animated-text'>{incorrect_feedback}</p>", unsafe_allow_html=True)
+        
+        # Set answered flag to prevent re-answering
+        st.session_state.answered = True
+
 
