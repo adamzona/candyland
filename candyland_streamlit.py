@@ -96,6 +96,9 @@ if "card" not in st.session_state:
     st.session_state.timer_running = False  # Control for stopping timer
     st.session_state.start_time = None  # Timer start time
 
+# **Display Sweet Score (Only One) at the Top**
+st.markdown(f"<div class='score-box'>🍭 Sweet Score: {st.session_state.sweet_score} 🍭</div>", unsafe_allow_html=True)
+
 # Play a draw card sound
 draw_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/chime.mp3"
 
@@ -138,9 +141,6 @@ if st.session_state.timer_running and not st.session_state.answered:
 # **Update Timer Display**
 timer_placeholder.markdown(f"<div class='timer-box'>{st.session_state.timer}s</div>", unsafe_allow_html=True)
 
-# **Display Sweet Score (Only One)**
-st.markdown(f"<div class='score-box'>🍭 Sweet Score: {st.session_state.sweet_score} 🍭</div>", unsafe_allow_html=True)
-
 if st.session_state.card:
     # Apply fade-in effect to the drawn card
     st.image(st.session_state.card, caption="Card Drawn", width=300)  # Fixed image size
@@ -174,6 +174,3 @@ if st.session_state.card:
                 st.markdown(play_sound(incorrect_sound), unsafe_allow_html=True)
 
             st.session_state.answered = True
-
-    # **Only One Sweet Score Display**
-    st.markdown(f"<div class='score-box'>🍭 Sweet Score: {st.session_state.sweet_score} 🍭</div>", unsafe_allow_html=True)
