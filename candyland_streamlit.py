@@ -73,7 +73,7 @@ if st.session_state.card:
             st.success("🎊 Sweet Victory! You got it right! 🍭 Keep going! 🎉")
             st.session_state.sweet_score += 10  # Increase score
         
-                else:
+                                else:
             st.error("🍬 Oopsie-daisy! That answer was as sticky as a melted lollipop! Try again next turn! 🍭")
         
         st.session_state.answered = True  # Prevent multiple submissions
