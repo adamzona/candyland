@@ -26,6 +26,20 @@ def normalize_answer(answer):
 # Streamlit UI Customization
 st.set_page_config(page_title="Candy Land Game", page_icon="🍬", layout="centered")
 
+# Add Candy Land-themed background
+st.markdown(
+    """
+    <style>
+    body {
+        background-image: url('https://raw.githubusercontent.com/adamzona/candyland/main/backgrounds/candyland_bg.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 st.title("🍬 Candy Land Digital Card Generator 🍭")
 st.session_state.setdefault('sweet_score', 0)
 st.markdown(f"<h2 style='text-align: center; font-size: 32px; color: #FF4500;'>🍭 Sweet Score: {st.session_state.sweet_score}</h2>", unsafe_allow_html=True)
