@@ -65,8 +65,16 @@ if st.session_state.card:
         normalized_correct_answer = normalize_answer(st.session_state.answer)
         
         if normalized_user_answer == normalized_correct_answer:
+            st.markdown("""
+            <audio autoplay>
+                <source src="https://raw.githubusercontent.com/adamzona/candyland/main/sounds/correct.mp3" type="audio/mpeg">
+            </audio>
+            """, unsafe_allow_html=True)
             st.success("🎊 Sweet Victory! You got it right! 🍭 Keep going! 🎉")
             st.session_state.sweet_score += 10  # Increase score
+        
+                else:
+            st.error("🍬 Oopsie-daisy! That answer was as sticky as a melted lollipop! Try again next turn! 🍭")
         
         st.session_state.answered = True  # Prevent multiple submissions
 
