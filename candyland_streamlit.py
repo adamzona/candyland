@@ -27,85 +27,7 @@ def normalize_answer(answer):
 # Streamlit UI Customization
 st.set_page_config(page_title="Candy Land Game", page_icon="🍭", layout="centered")
 
-st.markdown("""
-    <style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden !important;}
-    header {visibility: hidden;}
-
-    .big-font {font-size:24px !important; text-align: center;}
-    .question-box {
-        font-size: 48px;
-        border: 2px solid #FF69B4;
-        padding: 15px;
-        border-radius: 10px;
-        background-color: #FFF0F5;
-        text-align: center;
-    }
-    
-    /* Separate Boxes with Space Between */
-    .top-right-container {
-        position: absolute;
-        top: 20px;
-        right: 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 20px; /* Adds white space between Timer & Sweet Score */
-    }
-
-    .timer-box {
-        font-size: 24px;
-        font-weight: bold;
-        color: white;
-        padding: 10px;
-        border-radius: 10px;
-        text-align: center;
-        width: 120px;
-        height: 50px;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(to right, #FF69B4, #FF1493, #FFD700);
-    }
-
-    .score-box {
-        font-size: 24px;
-        font-weight: bold;
-        color: white;
-        padding: 10px;
-        border-radius: 10px;
-        text-align: center;
-        width: 300px;
-        height: 50px;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(to right, #FFD700, #FFA500, #FF4500);
-    }
-
-    .animated-text {font-size:22px; text-align:center; animation: fadeIn 2s;}
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-    /* Fade-In Effect for Card */
-    .fade-in-card {
-        animation: fadeIn 2s ease-in-out;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-# **Top Right Container for Timer & Sweet Score (With Space)**
-st.markdown("<div class='top-right-container'>", unsafe_allow_html=True)
-
-# Timer & Sweet Score Display
-timer_placeholder = st.empty()
-st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)  # Adds space
-sweet_score_placeholder = st.empty()
-
-st.markdown("</div>", unsafe_allow_html=True)
-
-st.title("🍬 Candy Land Digital Card Generator 🍭")
+st.title("🍬 Candy Land Digital Card Generator 🍽")
 st.markdown("<h2 class='big-font'>Draw a Card & Answer the Question!</h2>", unsafe_allow_html=True)
 
 # Ensure session state exists
@@ -123,6 +45,7 @@ if "card" not in st.session_state:
 # Play a draw card sound
 draw_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/chime.mp3"
 
+# Function to play a sound
 def play_sound(sound_url):
     return f"""
     <audio autoplay>
@@ -130,8 +53,8 @@ def play_sound(sound_url):
     </audio>
     """
 
+# Draw a card button
 if st.button("🎲 Draw a Card"):
-    st.session_state.card = None
     st.session_state.answered = False
     st.session_state.timer = 45  # Reset the timer
     st.session_state.timer_running = True  # Start timer
@@ -144,4 +67,39 @@ if st.button("🎲 Draw a Card"):
     st.balloons()
 
     # Draw a random card
-    card_type = random.choices(['easy', 'medium',
+    card_type = random.choices(['easy', 'medium', 'hard'], weights=[50, 35, 15])[0]
+    st.session_state.card, st.session_state.question, st.session_state.answer, st.session_state.card_type = get_random_card(card_type)
+
+# Display the drawn card
+if st.session_state.card:
+    st.image(st.session_state.card, caption=f"{st.session_state.card_type.capitalize()} Card", use_column_width=True)
+    st.markdown(f"<div class='question-box'>{st.session_state.question}</div>", unsafe_allow_html=True)
+    
+    # Answer input
+    user_answer = st.text_input("Enter your answer:")
+    
+    # Check answer button
+    if st.button("Check Answer") and not st.session_state.answered:
+        normalized_user_answer = normalize_answer(user_answer)
+        normalized_correct_answer = normalize_answer(st.session_state.answer)
+        
+        if normalized_user_answer == normalized_correct_answer:
+            st.success("Correct! 🎉")
+            st.session_state.sweet_score += 10  # Increase score
+        else:
+            st.error(f"Incorrect! The correct answer is: {st.session_state.answer}")
+        
+        st.session_state.answered = True  # Prevent multiple submissions
+
+# Display timer and score
+if st.session_state.timer_running:
+    time_elapsed = time.time() - st.session_state.start_time
+    remaining_time = max(0, st.session_state.timer - int(time_elapsed))
+    
+    if remaining_time == 0:
+        st.session_state.timer_running = False  # Stop timer
+        st.error("Time's up! Try again next turn.")
+    
+    st.write(f"⏳ Time Left: {remaining_time} seconds")
+
+st.write(f"🍭 Sweet Score: {st.session_state.sweet_score}")
