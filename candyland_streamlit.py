@@ -73,13 +73,17 @@ if st.button("🎲 Draw a Card"):
 # Display the drawn card
 if st.session_state.card:
     st.image(st.session_state.card, caption=f"{st.session_state.card_type.capitalize()} Card", width=300)
-    st.markdown(f"<div class='question-box'>{st.session_state.question}</div>", unsafe_allow_html=True)
+    st.markdown(f"""
+    <div class='question-box' style='font-size: 72px; padding: 30px; border: 3px solid #FF69B4; background-color: #FFF0F5; border-radius: 15px; text-align: center;'>
+        {st.session_state.question}
+    </div>
+""", unsafe_allow_html=True)
     
     # Answer input
-    user_answer = st.text_input("Enter your answer:")
+    user_answer = st.text_input("Enter your answer:", placeholder="Type here...", key="answer_input", help="Enter the correct answer to move forward!")
     
     # Check answer button
-    if st.button("Check Answer") and not st.session_state.answered:
+    if st.button("Check Answer", key="check_button", help="Submit your answer and see if you're correct!", use_container_width=True) and not st.session_state.answered:
         normalized_user_answer = normalize_answer(user_answer)
         normalized_correct_answer = normalize_answer(st.session_state.answer)
         
@@ -93,6 +97,10 @@ if st.session_state.card:
 
 # Display timer and score
 if st.session_state.timer_running:
+    while st.session_state.timer > 0:
+        time.sleep(1)
+        st.session_state.timer -= 1
+        st.rerun()
     st.session_state.timer -= 1
     time.sleep(1)
     time_elapsed = time.time() - st.session_state.start_time
@@ -105,4 +113,3 @@ if st.session_state.timer_running:
     st.write(f"⏳ Time Left: {remaining_time} seconds")
 
 st.write(f"🍭 Sweet Score: {st.session_state.sweet_score}")
-
