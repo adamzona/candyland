@@ -57,10 +57,10 @@ def play_sound(sound_url):
 
 # Draw a card button
 if st.button("🎲 Draw a Card"):
-    st.session_state.answer_feedback = None  # Reset feedback message
+    st.session_state.pop('answer_feedback', None)
     st.session_state.answer_feedback = ""  # Reset feedback message
     st.session_state.answered = False  # Reset answered status
-    st.session_state.answer_feedback = None  # Reset feedback message
+    st.session_state.pop('answer_feedback', None)
     st.session_state.answered = False
     st.session_state.timer = 45  # Reset the timer
     st.session_state.timer_running = True  # Start timer
