@@ -42,6 +42,7 @@ if "card" not in st.session_state:
 # Draw a card button
 if st.button("🎲 Draw a Card"):
     st.session_state.answered = False  # Reset answered status
+    st.session_state.answer_feedback = None  # Reset feedback message
     
     # Draw a random card
     card_type = random.choices(['easy', 'medium', 'hard'], weights=[50, 35, 15])[0]
@@ -65,15 +66,14 @@ if st.session_state.card:
         normalized_correct_answer = normalize_answer(st.session_state.answer)
         
         if normalized_user_answer == normalized_correct_answer:
+            st.success("🎊 Sweet Victory! You got it right! 🍭 Keep going! 🎉")
             st.markdown("""
             <audio autoplay>
                 <source src="https://raw.githubusercontent.com/adamzona/candyland/main/sounds/correct.mp3" type="audio/mpeg">
             </audio>
             """, unsafe_allow_html=True)
-            st.success("🎊 Sweet Victory! You got it right! 🍭 Keep going! 🎉")
             st.session_state.sweet_score += 10  # Increase score
-        
-                                else:
+        else:
             st.error("🍬 Oopsie-daisy! That answer was as sticky as a melted lollipop! Try again next turn! 🍭")
         
         st.session_state.answered = True  # Prevent multiple submissions
