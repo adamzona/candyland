@@ -43,35 +43,45 @@ st.markdown("""
         text-align: center;
     }
     
-    /* Single Rectangular Box for Timer & Sweet Score */
+    /* Separate Boxes for Timer & Sweet Score */
     .top-right-container {
         position: absolute;
-        top: 30px; /* Lowered to prevent overlapping title */
+        top: 20px;
         right: 10px;
-        width: 320px;
-        height: 80px;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 10px;
-        border-radius: 10px;
-        font-size: 22px;
+        gap: 15px; /* Adds space between Timer & Sweet Score */
+    }
+
+    .timer-box {
+        font-size: 24px;
         font-weight: bold;
         color: white;
-        background: linear-gradient(to right, #FF69B4, #FF1493, #FFD700);
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+        width: 120px;
+        height: 50px;
         box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(to right, #FF69B4, #FF1493, #FFD700);
     }
 
-    .timer-text {
-        font-size: 26px;
+    .score-box {
+        font-size: 24px;
         font-weight: bold;
-    }
-
-    .score-text {
-        font-size: 22px;
-        font-weight: bold;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+        width: 300px;
+        height: 50px;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(to right, #FFD700, #FFA500, #FF4500);
     }
 
     .animated-text {font-size:22px; text-align:center; animation: fadeIn 2s;}
@@ -84,10 +94,10 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# **Top Right Container for Timer & Sweet Score (Single Box)**
+# **Top Right Container for Timer & Sweet Score (Separate Boxes)**
 st.markdown("<div class='top-right-container'>", unsafe_allow_html=True)
 
-# Timer & Sweet Score Display (LIVE Updating)
+# Timer & Sweet Score Display
 timer_placeholder = st.empty()
 sweet_score_placeholder = st.empty()
 
@@ -141,11 +151,9 @@ if st.session_state.timer_running and not st.session_state.answered:
         elapsed_time = time.time() - st.session_state.start_time
         st.session_state.timer = max(0, 45 - int(elapsed_time))
 
-        # **Update Timer & Sweet Score Display (Inside ONE Box)**
-        timer_placeholder.markdown(
-            f"<div class='top-right-container'><span class='timer-text'>⏳ {st.session_state.timer}s</span><br><span class='score-text'>🍭 Sweet Score: {st.session_state.sweet_score}</span></div>",
-            unsafe_allow_html=True
-        )
+        # **Update Timer & Sweet Score Display**
+        timer_placeholder.markdown(f"<div class='timer-box'>⏳ {st.session_state.timer}s</div>", unsafe_allow_html=True)
+        sweet_score_placeholder.markdown(f"<div class='score-box'>🍭 Sweet Score: {st.session_state.sweet_score}</div>", unsafe_allow_html=True)
 
         time.sleep(1)
 
@@ -175,19 +183,10 @@ if st.session_state.card:
                 score_earned = points[st.session_state.card_type]
                 st.session_state.sweet_score += score_earned
 
-                correct_feedback = random.choice([
-                    f"✅ Correct! You earned {score_earned} points! 🍭",
-                    f"✅ Sweet success! {score_earned} points added! 🍬",
-                    f"✅ Boom! +{score_earned} points! 🚀"
-                ])
-                st.markdown(f"<p class='animated-text'>{correct_feedback}</p>", unsafe_allow_html=True)
-
-                # Play correct answer sound
+                st.markdown(f"<p class='animated-text'>✅ Correct! You earned {score_earned} points! 🍭</p>", unsafe_allow_html=True)
                 st.markdown(play_sound(correct_sound), unsafe_allow_html=True)
             else:
                 st.error(f"❌ Nope! The correct answer was: {st.session_state.answer}.")
-
-                # Play incorrect answer sound
                 st.markdown(play_sound(incorrect_sound), unsafe_allow_html=True)
 
             st.session_state.answered = True
