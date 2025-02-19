@@ -57,6 +57,8 @@ def play_sound(sound_url):
 
 # Draw a card button
 if st.button("🎲 Draw a Card"):
+    st.session_state.answered = False  # Reset answered status
+    st.session_state.answer_feedback = None  # Reset feedback message
     st.session_state.answered = False
     st.session_state.timer = 45  # Reset the timer
     st.session_state.timer_running = True  # Start timer
@@ -90,11 +92,11 @@ if st.session_state.card:
         normalized_correct_answer = normalize_answer(st.session_state.answer)
         
         if normalized_user_answer == normalized_correct_answer:
-            st.success("🎊 Sweet Victory! You got it right! 🍭 Keep going! 🎉")
+            st.session_state.answer_feedback = "🎊 Sweet Victory! You got it right! 🍭 Keep going! 🎉"
         st.markdown(play_sound("https://raw.githubusercontent.com/adamzona/candyland/main/sounds/correct.mp3"), unsafe_allow_html=True)
         st.session_state.sweet_score += 10  # Increase score
-    elif user_answer:
-        st.error(f"🚨 Oops! That’s not quite right! The correct answer is: {st.session_state.answer} 🍬 Don't give up!")
+    elif user_answer and not st.session_state.answered:
+        st.session_state.answer_feedback = f"🚨 Oops! That’s not quite right! The correct answer is: {st.session_state.answer} 🍬 Don't give up!"
         
         
         st.session_state.answered = True  # Prevent multiple submissions
@@ -102,4 +104,6 @@ if st.session_state.card:
 # Display timer and score
 
 
+if 'answer_feedback' in st.session_state and st.session_state.answer_feedback:
+    st.markdown(f"<h3 style='text-align: center; color: #FF4500;'>{st.session_state.answer_feedback}</h3>", unsafe_allow_html=True)
 st.write(f"🍭 Sweet Score: {st.session_state.sweet_score}")
