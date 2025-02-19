@@ -24,14 +24,16 @@ def normalize_answer(answer):
         except ValueError:
             return answer.strip().lower()  # For non-numeric answers, use lowercase stripping
 
-# Streamlit UI Customization
+# Streamlit UI Customization (Hides GitHub logo & footer)
 st.set_page_config(page_title="Candy Land Game", page_icon="🍭", layout="centered")
 
 st.markdown("""
     <style>
+    #MainMenu {visibility: hidden;}  /* Hides the top-right GitHub menu */
+    footer {visibility: hidden;}  /* Hides the Streamlit footer */
     .big-font {font-size:24px !important; text-align: center;}
     .question-box {
-        font-size: 48px;  /* Increased font size */
+        font-size: 48px;
         border: 2px solid #FF69B4;
         padding: 15px;
         border-radius: 10px;
