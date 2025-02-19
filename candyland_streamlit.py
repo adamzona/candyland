@@ -115,31 +115,28 @@ if st.button("🎲 Draw a Card"):
 
 if st.session_state.card:
     # Apply fade-in effect to the drawn card
-    st.image(st.session_state.card, caption="Card Drawn", width=300, use_container_width=True)
+    st.image(st.session_state.card, caption="Card Drawn", width=300)  # Fixed image size
     st.markdown(f"<div class='question-box'><b>Question:</b> {st.session_state.question}</div>", unsafe_allow_html=True)
 
-    # Countdown Timer Logic
-    if not st.session_state.answered:
-        start_time = time.time()
-        while st.session_state.timer > 0:
-            elapsed_time = time.time() - start_time
-            st.session_state.timer = max(0, 45 - int(elapsed_time))
-            time.sleep(1)
+    # **Fix Timer UI Issue** (Use `st.empty()` for smooth updates)
+    timer_placeholder = st.empty()
 
-            # **Fix: Use session state instead of experimental_rerun()**
-            st.session_state.rerun = True
-            st.stop()
+    start_time = time.time()
+    while st.session_state.timer > 0:
+        elapsed_time = time.time() - start_time
+        st.session_state.timer = max(0, 45 - int(elapsed_time))
+        
+        timer_placeholder.markdown(f"<div class='timer-box'>⏳ Time Left: {st.session_state.timer} sec</div>", unsafe_allow_html=True)
+        time.sleep(1)
 
-        # If timer runs out, auto-submit as incorrect
-        if st.session_state.timer == 0 and not st.session_state.answered:
-            st.session_state.answered = True
-            incorrect_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/buzzer.mp3"
-            st.markdown(play_sound(incorrect_sound), unsafe_allow_html=True)
-            st.error(f"⏳ Time's up! The correct answer was: {st.session_state.answer} ❌")
+    # **Auto-submit incorrect if time runs out**
+    if st.session_state.timer == 0 and not st.session_state.answered:
+        st.session_state.answered = True
+        incorrect_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/buzzer.mp3"
+        st.markdown(play_sound(incorrect_sound), unsafe_allow_html=True)
+        st.error(f"⏳ Time's up! The correct answer was: {st.session_state.answer} ❌")
 
-    # Display Timer
-    st.markdown(f"<div class='timer-box'>⏳ Time Left: {st.session_state.timer} sec</div>", unsafe_allow_html=True)
-
+    # **Restore Answer Input & Submit Button**
     user_answer = st.text_input("Your Answer:", key="answer_input", disabled=st.session_state.answered)
 
     if st.button("Submit Answer", disabled=st.session_state.answered):
