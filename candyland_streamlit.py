@@ -1,7 +1,6 @@
 import streamlit as st
 import random
 import json
-import time
 from fractions import Fraction
 
 # Load questions from the provided JSON file
@@ -39,40 +38,11 @@ if "card" not in st.session_state:
     st.session_state.answer = None
     st.session_state.card_type = None
     st.session_state.answered = False
-    st.session_state.answer_feedback = None
-    st.session_state.sweet_score = 0  # Renamed from Sweetness Score
-    
-    
-    
-
-# Play a draw card sound
-draw_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/chime.mp3"
-
-# Function to play a sound
-def play_sound(sound_url):
-    return f"""
-    <audio autoplay>
-        <source src="{sound_url}" type="audio/mpeg">
-    </audio>
-    """
 
 # Draw a card button
 if st.button("🎲 Draw a Card"):
-    
-    st.session_state.pop('answer_feedback', None)
     st.session_state.answered = False  # Reset answered status
     
-    st.session_state.answered = False
-    
-    
-    
-
-    # Play Draw Card Sound
-    st.markdown(play_sound(draw_sound), unsafe_allow_html=True)
-
-    # 🎉 Add confetti effect!
-    st.balloons()
-
     # Draw a random card
     card_type = random.choices(['easy', 'medium', 'hard'], weights=[50, 35, 15])[0]
     st.session_state.card, st.session_state.question, st.session_state.answer, st.session_state.card_type = get_random_card(card_type)
@@ -84,7 +54,7 @@ if st.session_state.card:
     <div class='question-box' style='font-size: 36px; padding: 30px; border: 3px solid #FF69B4; background-color: #FFF0F5; border-radius: 15px; text-align: center;'>
         {st.session_state.question}
     </div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
     
     # Answer input
     user_answer = st.text_input("Enter your answer:", placeholder="Type here...", key="answer_input", help="Enter the correct answer to move forward!")
@@ -95,18 +65,9 @@ if st.session_state.card:
         normalized_correct_answer = normalize_answer(st.session_state.answer)
         
         if normalized_user_answer == normalized_correct_answer:
-            st.session_state.answer_feedback = "🎊 Sweet Victory! You got it right! 🍭 Keep going! 🎉"
-            st.markdown(play_sound("https://raw.githubusercontent.com/adamzona/candyland/main/sounds/correct.mp3"), unsafe_allow_html=True)
+            st.success("🎊 Sweet Victory! You got it right! 🍭 Keep going! 🎉")
             st.session_state.sweet_score += 10  # Increase score
-    
         
-        
-                                st.session_state.answered = True  # Prevent multiple submissions
-        
+        st.session_state.answered = True  # Prevent multiple submissions
 
-# Display timer and score
-
-
-if 'answer_feedback' in st.session_state and st.session_state.answer_feedback:
-    st.markdown(f"<h3 style='text-align: center; color: #FF4500;'>{st.session_state.answer_feedback}</h3>", unsafe_allow_html=True)
 st.write(f"🍭 Sweet Score: {st.session_state.sweet_score}")
