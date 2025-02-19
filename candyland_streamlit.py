@@ -115,7 +115,7 @@ if st.button("🎲 Draw a Card"):
 
 if st.session_state.card:
     # Apply fade-in effect to the drawn card
-    st.image(st.session_state.card, caption="Card Drawn", width=300, use_column_width=True, help="Card")
+    st.image(st.session_state.card, caption="Card Drawn", width=300, use_column_width=True)
     st.markdown(f"<div class='question-box'><b>Question:</b> {st.session_state.question}</div>", unsafe_allow_html=True)
 
     # Countdown Timer Logic
