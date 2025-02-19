@@ -28,6 +28,7 @@ def normalize_answer(answer):
 st.set_page_config(page_title="Candy Land Game", page_icon="🍬", layout="centered")
 
 st.title("🍬 Candy Land Digital Card Generator 🍭")
+st.markdown(f"<h2 style='text-align: center; font-size: 32px; color: #FF4500;'>🍭 Sweet Score: {st.session_state.sweet_score}</h2>", unsafe_allow_html=True)
 st.markdown("<h2 class='big-font'>Draw a Card & Answer the Question!</h2>", unsafe_allow_html=True)
 
 # Ensure session state exists
@@ -38,9 +39,9 @@ if "card" not in st.session_state:
     st.session_state.card_type = None
     st.session_state.answered = False
     st.session_state.sweet_score = 0  # Renamed from Sweetness Score
-    st.session_state.timer = 45  # Start with 45 seconds
-    st.session_state.timer_running = False  # Control for stopping timer
-    st.session_state.start_time = None  # Timer start time
+    
+    
+    
 
 # Play a draw card sound
 draw_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/chime.mp3"
@@ -96,20 +97,6 @@ if st.session_state.card:
         st.session_state.answered = True  # Prevent multiple submissions
 
 # Display timer and score
-if st.session_state.timer_running:
-    while st.session_state.timer > 0:
-        time.sleep(1)
-        st.session_state.timer -= 1
-        st.rerun()
-    st.session_state.timer -= 1
-    time.sleep(1)
-    time_elapsed = time.time() - st.session_state.start_time
-    remaining_time = max(0, st.session_state.timer - int(time_elapsed))
-    
-    if remaining_time == 0:
-        st.session_state.timer_running = False  # Stop timer
-        st.error("Time's up! Try again next turn.")
-    
-    st.write(f"⏳ Time Left: {remaining_time} seconds")
+
 
 st.write(f"🍭 Sweet Score: {st.session_state.sweet_score}")
