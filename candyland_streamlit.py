@@ -53,14 +53,21 @@ st.markdown("""
         box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
     }
     .timer-box {
-        font-size: 30px;
+        font-size: 40px;
         font-weight: bold;
         color: white;
-        background-color: #ff3333;
-        padding: 10px;
-        border-radius: 10px;
+        background: linear-gradient(to right, #FF69B4, #FF1493, #FFD700);
+        padding: 15px;
+        border-radius: 20px;
         text-align: center;
         margin-top: 10px;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+        animation: pulse 1s infinite;
+    }
+    @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
     }
     .animated-text {font-size:22px; text-align:center; animation: fadeIn 2s;}
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -84,6 +91,7 @@ if "card" not in st.session_state:
     st.session_state.answered = False
     st.session_state.sweetness_score = 0
     st.session_state.timer = 45  # Start with 45 seconds
+    st.session_state.timer_running = False  # Control for stopping timer
 
 # Display Sweetness Score
 st.markdown(f"<div class='score-box'>🍭 Sweetness Score: {st.session_state.sweetness_score} 🍭</div>", unsafe_allow_html=True)
@@ -102,6 +110,7 @@ if st.button("🎲 Draw a Card"):
     st.session_state.card = None
     st.session_state.answered = False
     st.session_state.timer = 45  # Reset the timer
+    st.session_state.timer_running = True  # Start timer
 
     # Play Draw Card Sound
     st.markdown(play_sound(draw_sound), unsafe_allow_html=True)
@@ -121,50 +130,50 @@ if st.session_state.card:
     # **Fix Timer UI Issue** (Use `st.empty()` for smooth updates)
     timer_placeholder = st.empty()
 
-    start_time = time.time()
-    while st.session_state.timer > 0:
-        elapsed_time = time.time() - start_time
-        st.session_state.timer = max(0, 45 - int(elapsed_time))
-        
-        timer_placeholder.markdown(f"<div class='timer-box'>⏳ Time Left: {st.session_state.timer} sec</div>", unsafe_allow_html=True)
-        time.sleep(1)
+    # Timer countdown (runs only once per question)
+    if st.session_state.timer_running and not st.session_state.answered:
+        start_time = time.time()
+        while st.session_state.timer > 0:
+            elapsed_time = time.time() - start_time
+            st.session_state.timer = max(0, 45 - int(elapsed_time))
 
-    # **Auto-submit incorrect if time runs out**
-    if st.session_state.timer == 0 and not st.session_state.answered:
-        st.session_state.answered = True
-        incorrect_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/buzzer.mp3"
-        st.markdown(play_sound(incorrect_sound), unsafe_allow_html=True)
-        st.error(f"⏳ Time's up! The correct answer was: {st.session_state.answer} ❌")
+            timer_placeholder.markdown(f"<div class='timer-box'>⏳ {st.session_state.timer} sec</div>", unsafe_allow_html=True)
+            time.sleep(1)
 
-    # **Restore Answer Input & Submit Button**
-    user_answer = st.text_input("Your Answer:", key="answer_input", disabled=st.session_state.answered)
+            if st.session_state.timer == 0:
+                st.session_state.timer_running = False
+                st.session_state.answered = True
+                incorrect_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/buzzer.mp3"
+                st.markdown(play_sound(incorrect_sound), unsafe_allow_html=True)
+                st.error(f"⏳ Time's up! The correct answer was: {st.session_state.answer} ❌")
 
-    if st.button("Submit Answer", disabled=st.session_state.answered):
-        correct_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/correct.mp3"
-        incorrect_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/buzzer.mp3"
+    # **Ensure Answer Input & Submit Button Always Show**
+    if not st.session_state.answered:
+        user_answer = st.text_input("Your Answer:", key="answer_input")
+        if st.button("Submit Answer"):
+            correct_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/correct.mp3"
+            incorrect_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/buzzer.mp3"
 
-        if normalize_answer(user_answer) == normalize_answer(st.session_state.answer):
-            points = {"easy": 10, "medium": 15, "hard": 20}
-            score_earned = points[st.session_state.card_type]
-            st.session_state.sweetness_score += score_earned
+            if normalize_answer(user_answer) == normalize_answer(st.session_state.answer):
+                points = {"easy": 10, "medium": 15, "hard": 20}
+                score_earned = points[st.session_state.card_type]
+                st.session_state.sweetness_score += score_earned
 
-            correct_feedback = random.choice([
-                f"✅ Correct! You earned {score_earned} points! 🍭",
-                f"✅ Sweet success! {score_earned} points added! 🍬",
-                f"✅ Boom! +{score_earned} points! 🚀"
-            ])
-            st.markdown(f"<p class='animated-text'>{correct_feedback}</p>", unsafe_allow_html=True)
+                correct_feedback = random.choice([
+                    f"✅ Correct! You earned {score_earned} points! 🍭",
+                    f"✅ Sweet success! {score_earned} points added! 🍬",
+                    f"✅ Boom! +{score_earned} points! 🚀"
+                ])
+                st.markdown(f"<p class='animated-text'>{correct_feedback}</p>", unsafe_allow_html=True)
 
-            # Play correct answer sound
-            st.markdown(play_sound(correct_sound), unsafe_allow_html=True)
+                # Play correct answer sound
+                st.markdown(play_sound(correct_sound), unsafe_allow_html=True)
+            else:
+                st.error(f"❌ Nope! The correct answer was: {st.session_state.answer}.")
 
-        else:
-            incorrect_feedback = f"❌ Nope! The correct answer was: {st.session_state.answer}."
-            st.markdown(f"<p class='animated-text'>{incorrect_feedback}</p>", unsafe_allow_html=True)
+                # Play incorrect answer sound
+                st.markdown(play_sound(incorrect_sound), unsafe_allow_html=True)
 
-            # Play incorrect answer sound
-            st.markdown(play_sound(incorrect_sound), unsafe_allow_html=True)
-
-        st.session_state.answered = True
+            st.session_state.answered = True
 
     st.markdown(f"<div class='score-box'>🍭 Sweetness Score: {st.session_state.sweetness_score} 🍭</div>", unsafe_allow_html=True)
