@@ -52,28 +52,21 @@ st.markdown("""
         text-align: center;
         box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
     }
+    .timer-box {
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
+        background-color: #ff3333;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+        margin-top: 10px;
+    }
     .animated-text {font-size:22px; text-align:center; animation: fadeIn 2s;}
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    /* Flashing and Shaking Button */
-    @keyframes flash {
-        0% {background-color: #FF69B4;}
-        50% {background-color: #FFC0CB;}
-        100% {background-color: #FF69B4;}
-    }
-    @keyframes shake {
-        0% {transform: translateX(0);}
-        25% {transform: translateX(-5px);}
-        50% {transform: translateX(5px);}
-        75% {transform: translateX(-5px);}
-        100% {transform: translateX(5px);}
-    }
-    .flash-button {
-        animation: flash 1s infinite, shake 0.5s infinite;
-    }
-
-    /* Fade-in effect for drawn card */
-    .fade-in {
+    /* Fade-In Effect for Card */
+    .fade-in-card {
         animation: fadeIn 2s ease-in-out;
     }
     </style>
@@ -90,13 +83,10 @@ if "card" not in st.session_state:
     st.session_state.card_type = None
     st.session_state.answered = False
     st.session_state.sweetness_score = 0
+    st.session_state.timer = 45  # Start with 45 seconds
 
 # Display Sweetness Score
 st.markdown(f"<div class='score-box'>🍭 Sweetness Score: {st.session_state.sweetness_score} 🍭</div>", unsafe_allow_html=True)
-
-# Draw Card Button with Effects
-draw_card_html = '<button class="flash-button">🎲 Draw a Card</button>'
-draw_card_clicked = st.button("🎲 Draw a Card")
 
 # Play a draw card sound
 draw_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/chime.mp3"
@@ -108,28 +98,45 @@ def play_sound(sound_url):
     </audio>
     """
 
-if draw_card_clicked:
+if st.button("🎲 Draw a Card"):
     st.session_state.card = None
     st.session_state.answered = False
+    st.session_state.timer = 45  # Reset the timer
 
     # Play Draw Card Sound
     st.markdown(play_sound(draw_sound), unsafe_allow_html=True)
 
-    # Draw a random card
-    card_type = random.choices(
-        ['easy', 'medium', 'hard'], weights=[50, 40, 10]
-    )[0]
-    st.session_state.card, st.session_state.question, st.session_state.answer, st.session_state.card_type = get_random_card(card_type)
-
     # 🎉 Add confetti effect!
     st.balloons()
 
-if st.session_state.card:
-    # Apply fade-in effect when drawing a new card
-    st.markdown(f'<img src="{st.session_state.card}" class="fade-in" width="300">', unsafe_allow_html=True)
+    # Draw a random card
+    card_type = random.choices(['easy', 'medium', 'hard'], weights=[50, 40, 10])[0]
+    st.session_state.card, st.session_state.question, st.session_state.answer, st.session_state.card_type = get_random_card(card_type)
 
+if st.session_state.card:
+    # Apply fade-in effect to the drawn card
+    st.image(st.session_state.card, caption="Card Drawn", width=300, use_column_width=True, help="Card")
     st.markdown(f"<div class='question-box'><b>Question:</b> {st.session_state.question}</div>", unsafe_allow_html=True)
-    
+
+    # Countdown Timer Logic
+    if not st.session_state.answered:
+        start_time = time.time()
+        while st.session_state.timer > 0:
+            elapsed_time = time.time() - start_time
+            st.session_state.timer = max(0, 45 - int(elapsed_time))
+            time.sleep(1)
+            st.experimental_rerun()  # Refresh page to update timer
+
+        # If timer runs out, auto-submit as incorrect
+        if st.session_state.timer == 0 and not st.session_state.answered:
+            st.session_state.answered = True
+            incorrect_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/buzzer.mp3"
+            st.markdown(play_sound(incorrect_sound), unsafe_allow_html=True)
+            st.error(f"⏳ Time's up! The correct answer was: {st.session_state.answer} ❌")
+
+    # Display Timer
+    st.markdown(f"<div class='timer-box'>⏳ Time Left: {st.session_state.timer} sec</div>", unsafe_allow_html=True)
+
     user_answer = st.text_input("Your Answer:", key="answer_input", disabled=st.session_state.answered)
 
     if st.button("Submit Answer", disabled=st.session_state.answered):
@@ -152,10 +159,7 @@ if st.session_state.card:
             st.markdown(play_sound(correct_sound), unsafe_allow_html=True)
 
         else:
-            incorrect_feedback = random.choice([
-                f"❌ Nope! The correct answer was: {st.session_state.answer}. Try again! 🤔",
-                f"❌ Oof, close but no candy! The answer was: {st.session_state.answer}. 🍭"
-            ])
+            incorrect_feedback = f"❌ Nope! The correct answer was: {st.session_state.answer}."
             st.markdown(f"<p class='animated-text'>{incorrect_feedback}</p>", unsafe_allow_html=True)
 
             # Play incorrect answer sound
