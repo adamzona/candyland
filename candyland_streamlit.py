@@ -29,7 +29,14 @@ st.set_page_config(page_title="Candy Land Game", page_icon="🍭", layout="cente
 st.markdown("""
     <style>
     .big-font {font-size:24px !important; text-align: center;}
-    .question-box {border: 2px solid #FF69B4; padding: 15px; border-radius: 10px; background-color: #FFF0F5; text-align: center;}
+    .question-box {
+        font-size: 48px;  /* Increased font size */
+        border: 2px solid #FF69B4;
+        padding: 15px;
+        border-radius: 10px;
+        background-color: #FFF0F5;
+        text-align: center;
+    }
     .animated-text {font-size:22px; text-align:center; animation: fadeIn 2s;}
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
@@ -73,7 +80,4 @@ if st.session_state.card:
                 f"❌ Not quite! The answer was: {st.session_state.answer}. Better luck next time! 🎲",
                 f"❌ Almost! The answer was: {st.session_state.answer}. Keep going! 🚀",
                 f"❌ Whoops! The answer was: {st.session_state.answer}. Don't give up! 💪"
-            ])}</p>", unsafe_allow_html=True)
-            
-
-            
+            ])}</p>", unsafe_allow_html=True
