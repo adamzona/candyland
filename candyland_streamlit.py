@@ -72,7 +72,7 @@ if st.button("🎲 Draw a Card"):
 
 # Display the drawn card
 if st.session_state.card:
-    st.image(st.session_state.card, caption=f"{st.session_state.card_type.capitalize()} Card", use_column_width=True)
+    st.image(st.session_state.card, caption=f"{st.session_state.card_type.capitalize()} Card", use_container_width=True)
     st.markdown(f"<div class='question-box'>{st.session_state.question}</div>", unsafe_allow_html=True)
     
     # Answer input
