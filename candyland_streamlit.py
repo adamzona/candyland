@@ -94,6 +94,18 @@ if st.session_state.card:
     user_answer = st.text_input("Your Answer:", key="answer_input", disabled=st.session_state.answered)
     
     if st.button("Submit Answer", disabled=st.session_state.answered):
+        # Define sound file URLs (hosted on GitHub)
+        correct_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/correct.mp3"
+        incorrect_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/buzzer.mp3"
+
+        # HTML to play sound
+        def play_sound(sound_url):
+            return f"""
+            <audio autoplay>
+                <source src="{sound_url}" type="audio/mpeg">
+            </audio>
+            """
+
         if normalize_answer(user_answer) == normalize_answer(st.session_state.answer):
             # Determine points based on difficulty
             points = {"easy": 10, "medium": 15, "hard": 20}
@@ -108,6 +120,10 @@ if st.session_state.card:
                 f"✅ You’re on fire! 🔥 {score_earned} points earned!"
             ])
             st.markdown(f"<p class='animated-text'>{correct_feedback}</p>", unsafe_allow_html=True)
+
+            # Play correct answer sound
+            st.markdown(play_sound(correct_sound), unsafe_allow_html=True)
+
         else:
             incorrect_feedback = random.choice([
                 f"❌ Nope! The correct answer was: {st.session_state.answer}. Try again! 🤔",
@@ -117,7 +133,10 @@ if st.session_state.card:
                 f"❌ Whoops! The answer was: {st.session_state.answer}. Don't give up! 💪"
             ])
             st.markdown(f"<p class='animated-text'>{incorrect_feedback}</p>", unsafe_allow_html=True)
-        
+
+            # Play incorrect answer sound
+            st.markdown(play_sound(incorrect_sound), unsafe_allow_html=True)
+
         # Set answered flag to prevent re-answering
         st.session_state.answered = True
 
