@@ -76,7 +76,7 @@ if st.button("🎲 Draw a Card"):
 if st.session_state.card:
     st.image(st.session_state.card, caption=f"{st.session_state.card_type.capitalize()} Card", width=300)
     st.markdown(f"""
-    <div class='question-box' style='font-size: 72px; padding: 30px; border: 3px solid #FF69B4; background-color: #FFF0F5; border-radius: 15px; text-align: center;'>
+    <div class='question-box' style='font-size: 36px; padding: 30px; border: 3px solid #FF69B4; background-color: #FFF0F5; border-radius: 15px; text-align: center;'>
         {st.session_state.question}
     </div>
 """, unsafe_allow_html=True)
@@ -90,10 +90,12 @@ if st.session_state.card:
         normalized_correct_answer = normalize_answer(st.session_state.answer)
         
         if normalized_user_answer == normalized_correct_answer:
-            st.success("Correct! 🎉")
+            st.success("🎊 Sweet Victory! You got it right! 🍭 Keep going! 🎉")
+st.markdown(play_sound("https://raw.githubusercontent.com/adamzona/candyland/main/sounds/correct.mp3"), unsafe_allow_html=True)
             st.session_state.sweet_score += 10  # Increase score
         else:
-            st.error(f"Incorrect! The correct answer is: {st.session_state.answer}")
+            st.error(f"🚨 Oops! That’s not quite right! The correct answer is: {st.session_state.answer} 🍬 Don't give up!")
+st.markdown(play_sound("https://raw.githubusercontent.com/adamzona/candyland/main/sounds/buzzer.mp3"), unsafe_allow_html=True)
         
         st.session_state.answered = True  # Prevent multiple submissions
 
