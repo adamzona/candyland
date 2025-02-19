@@ -49,11 +49,11 @@ st.markdown("""
         top: 10px;
         right: 10px;
         display: flex;
-        gap: 10px;
+        gap: 20px; /* Adds space between Timer & Sweet Score */
     }
 
-    .timer-box, .score-box {
-        font-size: 20px;
+    .timer-box {
+        font-size: 22px;
         font-weight: bold;
         color: white;
         padding: 10px;
@@ -65,13 +65,22 @@ st.markdown("""
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-
-    .timer-box {
         background: linear-gradient(to right, #FF69B4, #FF1493, #FFD700);
     }
 
     .score-box {
+        font-size: 22px;
+        font-weight: bold;
+        color: white;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+        width: 450px; /* Increased to 3x its original size */
+        height: 50px;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         background: linear-gradient(to right, #FFD700, #FFA500, #FF4500);
     }
 
@@ -164,7 +173,7 @@ if st.session_state.card:
             correct_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/correct.mp3"
             incorrect_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/buzzer.mp3"
 
-            points = {"easy": 10, "medium": 15, "hard": 20}  # ✅ Fixed dictionary
+            points = {"easy": 10, "medium": 15, "hard": 20}
 
             if normalize_answer(user_answer) == normalize_answer(st.session_state.answer):
                 score_earned = points[st.session_state.card_type]
