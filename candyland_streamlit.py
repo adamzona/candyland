@@ -30,7 +30,15 @@ st.set_page_config(page_title="Candy Land Game", page_icon="🍭", layout="cente
 st.markdown("""
     <style>
     #MainMenu {visibility: hidden;}  /* Hides the top-right GitHub menu */
-    footer {visibility: hidden;}  /* Hides the Streamlit footer */
+    footer {visibility: hidden !important;}  /* Hides the Streamlit footer */
+    header {visibility: hidden;}  /* Hides Streamlit header */
+    
+    /* Forcefully hide any remaining icons */
+    .viewerBadge_container__1QSob {display: none !important;}
+    .styles_viewerBadge__1yB5_ {display: none !important;}
+    .styles_viewerBadgeContainer__1YwJc {display: none !important;}
+    .styles_stActionButton__2vRR7 {display: none !important;}
+
     .big-font {font-size:24px !important; text-align: center;}
     .question-box {
         font-size: 48px;
