@@ -71,6 +71,11 @@ st.markdown("""
     .flash-button {
         animation: flash 1s infinite, shake 0.5s infinite;
     }
+
+    /* Fade-in effect for drawn card */
+    .fade-in {
+        animation: fadeIn 2s ease-in-out;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -95,7 +100,6 @@ draw_card_clicked = st.button("🎲 Draw a Card")
 
 # Play a draw card sound
 draw_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/chime.mp3"
-shuffle_sound = "https://raw.githubusercontent.com/adamzona/candyland/main/sounds/shuffle.mp3"
 
 def play_sound(sound_url):
     return f"""
@@ -111,11 +115,6 @@ if draw_card_clicked:
     # Play Draw Card Sound
     st.markdown(play_sound(draw_sound), unsafe_allow_html=True)
 
-    # Display "Shuffling..." Effect
-    with st.spinner("🔄 Shuffling cards..."):
-        st.markdown(play_sound(shuffle_sound), unsafe_allow_html=True)  # Play shuffle sound
-        time.sleep(1.5)  # Simulate card shuffling delay
-
     # Draw a random card
     card_type = random.choices(
         ['easy', 'medium', 'hard'], weights=[50, 40, 10]
@@ -126,7 +125,9 @@ if draw_card_clicked:
     st.balloons()
 
 if st.session_state.card:
-    st.image(st.session_state.card, caption="Card Drawn", width=300)
+    # Apply fade-in effect when drawing a new card
+    st.markdown(f'<img src="{st.session_state.card}" class="fade-in" width="300">', unsafe_allow_html=True)
+
     st.markdown(f"<div class='question-box'><b>Question:</b> {st.session_state.question}</div>", unsafe_allow_html=True)
     
     user_answer = st.text_input("Your Answer:", key="answer_input", disabled=st.session_state.answered)
