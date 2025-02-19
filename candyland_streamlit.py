@@ -98,8 +98,7 @@ if st.session_state.card:
             st.session_state.answer_feedback = "🎊 Sweet Victory! You got it right! 🍭 Keep going! 🎉"
         st.markdown(play_sound("https://raw.githubusercontent.com/adamzona/candyland/main/sounds/correct.mp3"), unsafe_allow_html=True)
         st.session_state.sweet_score += 10  # Increase score
-    elif user_answer and not st.session_state.answered:
-        st.session_state.answer_feedback = f"🚨 Oops! That’s not quite right! The correct answer is: {st.session_state.answer} 🍬 Don't give up!"
+    
         
         
         st.session_state.answered = True  # Prevent multiple submissions
