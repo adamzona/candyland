@@ -43,45 +43,25 @@ st.markdown("""
         text-align: center;
     }
     
-    /* Positioning Timer and Sweet Score */
+    /* Single Box for Timer & Sweet Score */
     .top-right-container {
         position: absolute;
         top: 10px;
         right: 10px;
+        width: 300px;
+        height: 70px;
         display: flex;
-        gap: 20px; /* Adds space between Timer & Sweet Score */
-    }
-
-    .timer-box {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 10px;
+        border-radius: 10px;
         font-size: 22px;
         font-weight: bold;
         color: white;
-        padding: 10px;
-        border-radius: 10px;
-        text-align: center;
-        width: 150px;
-        height: 50px;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
         background: linear-gradient(to right, #FF69B4, #FF1493, #FFD700);
-    }
-
-    .score-box {
-        font-size: 22px;
-        font-weight: bold;
-        color: white;
-        padding: 10px;
-        border-radius: 10px;
-        text-align: center;
-        width: 450px; /* Increased to 3x its original size */
-        height: 50px;
         box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(to right, #FFD700, #FFA500, #FF4500);
     }
 
     .animated-text {font-size:22px; text-align:center; animation: fadeIn 2s;}
@@ -94,10 +74,10 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# **Top Right Container for Timer & Sweet Score**
+# **Top Right Container for Timer & Sweet Score (Combined into One Box)**
 st.markdown("<div class='top-right-container'>", unsafe_allow_html=True)
 
-# Timer Display (Small, Square, Next to Sweet Score)
+# Timer & Sweet Score Display
 timer_placeholder = st.empty()
 sweet_score_placeholder = st.empty()
 
@@ -145,7 +125,7 @@ if st.button("🎲 Draw a Card"):
     card_type = random.choices(['easy', 'medium', 'hard'], weights=[50, 40, 10])[0]
     st.session_state.card, st.session_state.question, st.session_state.answer, st.session_state.card_type = get_random_card(card_type)
 
-# **Make sure the timer updates while the game is active**
+# **Ensure Timer is Running Properly**
 if st.session_state.timer_running and not st.session_state.answered:
     elapsed_time = time.time() - st.session_state.start_time
     st.session_state.timer = max(0, 45 - int(elapsed_time))
@@ -157,9 +137,8 @@ if st.session_state.timer_running and not st.session_state.answered:
         st.markdown(play_sound(incorrect_sound), unsafe_allow_html=True)
         st.error(f"⏳ Time's up! The correct answer was: {st.session_state.answer} ❌")
 
-# **Update Timer & Sweet Score Display**
-timer_placeholder.markdown(f"<div class='timer-box'>⏳ {st.session_state.timer}s</div>", unsafe_allow_html=True)
-sweet_score_placeholder.markdown(f"<div class='score-box'>🍭 Sweet Score: {st.session_state.sweet_score}</div>", unsafe_allow_html=True)
+# **Update Timer & Sweet Score Display (Both Inside One Box)**
+timer_placeholder.markdown(f"<div class='top-right-container'>⏳ {st.session_state.timer}s<br>🍭 Sweet Score: {st.session_state.sweet_score}</div>", unsafe_allow_html=True)
 
 if st.session_state.card:
     # Apply fade-in effect to the drawn card
