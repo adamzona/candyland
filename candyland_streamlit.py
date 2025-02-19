@@ -95,7 +95,7 @@ if st.session_state.card:
         st.session_state.sweet_score += 10  # Increase score
     else:
         st.error(f"🚨 Oops! That’s not quite right! The correct answer is: {st.session_state.answer} 🍬 Don't give up!")
-        st.markdown(play_sound("https://raw.githubusercontent.com/adamzona/candyland/main/sounds/buzzer.mp3"), unsafe_allow_html=True)
+        
         
         st.session_state.answered = True  # Prevent multiple submissions
 
