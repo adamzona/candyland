@@ -55,6 +55,7 @@ if "card" not in st.session_state:
 
 # Draw a card button
 if st.button("🎲 Draw a Card"):
+    st.session_state.answer_input = ""  # Clear previous answer
     st.markdown("""
     <audio autoplay>
         <source src="https://raw.githubusercontent.com/adamzona/candyland/main/sounds/chime.mp3" type="audio/mpeg">
