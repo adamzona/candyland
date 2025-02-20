@@ -65,7 +65,7 @@ if st.button("🎲 Draw a Card"):
     st.session_state.answer_feedback = None  # Reset feedback message
     
     # Draw a random card
-    card_type = random.choices(['easy', 'medium', 'hard'], weights=[50, 35, 15])[0]
+    card_type = random.choices(['easy', 'medium', 'hard'], weights=[40, 35, 25])[0]
     st.session_state.card, st.session_state.question, st.session_state.answer, st.session_state.card_type = get_random_card(card_type)
 
 # Display the drawn card
