@@ -40,7 +40,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.title("🍬 Candy Land Digital Card Generator 🍭")
+st.title("🍬 Mr. Zona's Candyland Card Generator 🍭")
 st.session_state.setdefault('sweet_score', 0)
 st.markdown(f"<h2 style='text-align: center; font-size: 32px; color: #FF4500;'>🍭 Sweet Score: {st.session_state.sweet_score}</h2>", unsafe_allow_html=True)
 st.markdown("<h2 class='big-font'>Draw a Card & Answer the Question!</h2>", unsafe_allow_html=True)
