@@ -84,7 +84,7 @@ if st.session_state.card:
         normalized_user_answer = normalize_answer(user_answer)
         normalized_correct_answer = normalize_answer(st.session_state.answer)
         
-        if normalized_user_answer == normalized_correct_answer:
+        if normalized_user_answer.replace(' ', '') == normalized_correct_answer.replace(' ', ''):
             st.success("🎊 Sweet Victory! You got it right! 🍭 Keep going! 🎉")
             st.markdown("""
             <audio autoplay>
